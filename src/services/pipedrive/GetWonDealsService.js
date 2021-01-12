@@ -6,7 +6,7 @@ const pipedrive = require('../../apis/pipedrive');
 class GetWonDealsService {
   async execute() {
     try {
-      const deals = await Deal.find({}).select('id');
+      const deals = await Deal.find({});
       const start = deals ? Math.max(...deals.map(deal => deal.id)) : 0;
 
       const config = {

@@ -1,2 +1,5 @@
 require('./database');
-require('./services');
+
+const Workers = require('./jobs');
+
+Workers.init();
