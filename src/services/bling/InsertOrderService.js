@@ -5,7 +5,7 @@ const CreateDealXMLService = require('./CreateDealXMLService');
 
 const Deal = mongoose.model('deals');
 
-class PostDealsService {
+class InsertOrderService {
   async execute() {
     const dealsJSON = await Deal.find({ bling_posted: false });
 
@@ -24,4 +24,4 @@ class PostDealsService {
   }
 }
 
-module.exports = PostDealsService;
+module.exports = InsertOrderService;
