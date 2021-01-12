@@ -18,7 +18,10 @@ class GetWonDealsService {
 
       const response = await pipedrive.get('/deals', config);
 
-      if (!response) return;
+      if (!response || !response.data || !response.data.data) {
+        console.info('No new won deals');
+        return;
+      }
 
       await Deal.insertMany(response.data.data);
     } catch (err) {
