@@ -1,22 +1,28 @@
 const { CronJob } = require('cron');
-const InsertOrdersService = require('../services/bling/InsertOrdersService');
+const PlaceOrdersOnBlingService = require('../services/bling/PlaceOrdersOnBlingService');
 const GetWonDealsService = require('../services/pipedrive/GetWonDealsService');
 const UpdatedBlingPostedDealService = require('../services/pipedrive/UpdatedBlingPostedDealService');
+const ConsolidateDealsService = require('../services/deals/ConsolidateDealsService');
 
 const getWonDeals = new GetWonDealsService();
-const insertOrders = new InsertOrdersService();
+const placeOrdersOnBling = new PlaceOrdersOnBlingService();
 const updateBlingPosted = new UpdatedBlingPostedDealService();
+const consolidateDeals = new ConsolidateDealsService();
 
-const InsertNewOrdersJob = new CronJob('*/30 * * * * *', async () => {
+const DealIntegrationJob = new CronJob('*/30 * * * * *', async () => {
   try {
-    const deals = await getWonDeals.execute();
+    const newDealsWon = await getWonDeals.execute();
 
-    const placedOrders = await insertOrders.execute(deals);
+    if (!newDealsWon) return;
 
-    await updateBlingPosted.execute(placedOrders);
+    const blingPlacedOrders = await placeOrdersOnBling.execute(newDealsWon);
+
+    await updateBlingPosted.execute(blingPlacedOrders);
+
+    await consolidateDeals.execute(updateBlingPosted);
   } catch (err) {
     console.log(err);
   }
 });
 
-module.exports = InsertNewOrdersJob;
+module.exports = DealIntegrationJob;

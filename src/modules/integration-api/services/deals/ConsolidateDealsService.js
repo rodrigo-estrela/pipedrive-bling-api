@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Sales = mongoose.model('sales');
 
-class AddSalesService {
+class ConsolidateDealsService {
   async execute(deals) {
     const totalSales = {};
 
@@ -11,7 +11,6 @@ class AddSalesService {
         totalSales[deal.won_time] + deal.value || deal.value;
     });
 
-    console.log(totalSales);
     Object.keys(totalSales).forEach(async day => {
       const sales = await Sales.findOne({ date: day });
 
@@ -28,4 +27,4 @@ class AddSalesService {
   }
 }
 
-module.exports = AddSalesService;
+module.exports = ConsolidateDealsService;

@@ -18,11 +18,9 @@ async function postOrderToBling(xml) {
   return retorno;
 }
 
-class InsertOrdersService {
+class PlaceOrdersOnBlingService {
   async execute(dealsJSON) {
     const createDealXML = new CreateDealXMLService();
-
-    if (dealsJSON.length === 0) return undefined;
 
     let placedOrders = await Promise.all(
       dealsJSON.map(async deal => {
@@ -42,4 +40,4 @@ class InsertOrdersService {
   }
 }
 
-module.exports = InsertOrdersService;
+module.exports = PlaceOrdersOnBlingService;
