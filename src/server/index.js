@@ -9,7 +9,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 
-const routes = require('./routes');
+const apiV1 = require('./apiV1/routes');
 
 const app = express();
 
@@ -21,10 +21,7 @@ const limiter = rateLimit({
 app.use(cors());
 app.use(helmet());
 app.use(limiter);
-app.use(routes);
-app.get('/', (req, res) => {
-  return res.status(200).json({ message: 'The server is live' });
-});
+app.use('/v1', apiV1);
 app.use(morgan('tiny'));
 
 const httpsOptions = {
