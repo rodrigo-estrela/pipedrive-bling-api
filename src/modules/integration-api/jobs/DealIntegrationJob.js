@@ -1,16 +1,22 @@
 const { CronJob } = require('cron');
-const InsertOrderService = require('../services/bling/InsertOrderService');
+const InsertOrdersService = require('../services/bling/InsertOrdersService');
 const GetWonDealsService = require('../services/pipedrive/GetWonDealsService');
+const UpdatedBlingPostedDealService = require('../services/pipedrive/UpdatedBlingPostedDealService');
 
 const getWonDeals = new GetWonDealsService();
-const insertOrder = new InsertOrderService();
+const insertOrders = new InsertOrdersService();
+const updateBlingPosted = new UpdatedBlingPostedDealService();
 
 const InsertNewOrdersJob = new CronJob('*/30 * * * * *', async () => {
-  console.log('getting new deals with won status at pipedrive');
-  await getWonDeals.execute();
+  try {
+    const deals = await getWonDeals.execute();
 
-  console.log('sending new orders to bling');
-  await insertOrder.execute();
+    const placedOrders = await insertOrders.execute(deals);
+
+    await updateBlingPosted.execute(placedOrders);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = InsertNewOrdersJob;
