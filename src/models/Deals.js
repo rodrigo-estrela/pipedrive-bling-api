@@ -8,6 +8,7 @@ const dealSchema = new Schema({
   value: { type: Number, required: true },
   currency: { type: String, required: true },
   status: { type: String, required: true },
+  won_time: { type: Date, required: true },
   org_name: { type: String, required: true },
   bling_posted: { type: Boolean, require: true, default: false },
 });

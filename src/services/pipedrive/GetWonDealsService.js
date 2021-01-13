@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { format } = require('date-fns');
 
 const Deal = mongoose.model('deals');
 const pipedrive = require('../../apis/pipedrive');
@@ -23,7 +24,17 @@ class GetWonDealsService {
         return;
       }
 
-      await Deal.insertMany(response.data.data);
+      const dealsToBeAdded = response.data.data.map(deal => ({
+        id: deal.id,
+        title: deal.title,
+        value: deal.value,
+        currency: deal.currency,
+        status: deal.status,
+        won_time: format(new Date(deal.won_time), 'yyy-MM-dd'),
+        org_name: deal.org_name,
+      }));
+
+      await Deal.insertMany(dealsToBeAdded);
     } catch (err) {
       console.error(err);
     }

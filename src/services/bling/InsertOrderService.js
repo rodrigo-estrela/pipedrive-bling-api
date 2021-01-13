@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const bling = require('../../apis/bling');
 const CreateDealXMLService = require('./CreateDealXMLService');
+const AddSalesService = require('../sales/AddSalesService');
 
 const Deal = mongoose.model('deals');
 
@@ -25,6 +26,7 @@ async function postOrderToBling(xml) {
 class InsertOrderService {
   async execute() {
     const createDealXML = new CreateDealXMLService();
+    const addSales = new AddSalesService();
 
     const dealsJSON = await Deal.find({ bling_posted: false }).limit(100);
 
@@ -46,6 +48,10 @@ class InsertOrderService {
       { id: { $in: placedOrders } },
       { bling_posted: true },
     );
+
+    const updatedDeals = await Deal.find({ id: { $in: placedOrders } });
+
+    await addSales.execute(updatedDeals);
   }
 }
 
