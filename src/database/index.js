@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-const keys = require('../config/keys');
+const config = require('../config');
+
 require('../models/Deals');
 require('../models/Sales');
 
-mongoose.connect(keys.mongoURI, {
+mongoose.connect(config.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
