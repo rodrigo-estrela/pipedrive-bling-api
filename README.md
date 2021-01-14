@@ -34,7 +34,7 @@ The main challenge for this project was to decide the logic on how to get the ne
 
   2. Add a custom filter
     I used the Pipedrive API to implement a Deal custom filter. The filter criteria is: deals with custom field bling not equal to 'posted'. See bellow the json template for the filter creation:
-    ```json
+    ```js
     {
         "name": "deals-won-bling-not-posted",
         "type": "deals",
