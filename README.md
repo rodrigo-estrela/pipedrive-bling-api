@@ -74,4 +74,3 @@ Parameters | Comments
 ------------- | -------------
 skip | Optional - Pagination start. Default = 0
 limit  | Optional - Items per page. Max = 100
-
