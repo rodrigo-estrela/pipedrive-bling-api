@@ -1,27 +1,33 @@
 const mongoose = require('mongoose');
 
-const Sales = mongoose.model('sales');
+const ConsolidatedDeals = mongoose.model('consolidatedDeals');
 
 class ConsolidateDealsService {
   async execute(deals) {
-    const totalSales = {};
+    const newDealsByDay = {};
 
     deals.forEach(deal => {
-      totalSales[deal.won_time] =
-        totalSales[deal.won_time] + deal.value || deal.value;
+      newDealsByDay[deal.won_time] =
+        newDealsByDay[deal.won_time] + deal.value || deal.value;
     });
 
-    Object.keys(totalSales).forEach(async day => {
-      const sales = await Sales.findOne({ date: day });
+    Object.keys(newDealsByDay).forEach(async day => {
+      const currentDayResult = await ConsolidatedDeals.findOne({ date: day });
 
-      if (!sales) {
+      if (!currentDayResult) {
         await (
-          await Sales.create({ date: day, value: totalSales[day] })
+          await ConsolidatedDeals.create({
+            date: day,
+            value: newDealsByDay[day],
+          })
         ).save();
       } else {
-        sales.value += totalSales[day];
+        currentDayResult.value += newDealsByDay[day];
 
-        await Sales.findOneAndUpdate({ date: day }, { value: sales.value });
+        await ConsolidatedDeals.findOneAndUpdate(
+          { date: day },
+          { value: currentDayResult.value },
+        );
       }
     });
   }

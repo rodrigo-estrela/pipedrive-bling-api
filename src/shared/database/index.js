@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const config = require('../../config');
 
-require('../../modules/integration-api/models/Deals');
-require('../../modules/integration-api/models/Sales');
+require('../../modules/integration-api/models/ConsolidatedDeals');
 
 mongoose
   .connect(config.mongoURI, {

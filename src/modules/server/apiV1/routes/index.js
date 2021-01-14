@@ -1,9 +1,10 @@
 const { Router } = require('express');
-const salesRouter = require('./sales.routes');
+const dealsRouter = require('./deals.routes');
 
 const routes = Router();
 
-routes.use('/sales', salesRouter);
+routes.use('/sales', dealsRouter);
+
 routes.use('/', (req, res) => {
   return res
     .status(200)
