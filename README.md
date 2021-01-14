@@ -74,3 +74,7 @@ Parameters | Comments
 ------------- | -------------
 skip | Optional - Pagination start. Default = 0
 limit  | Optional - Items per page. Max = 100
+
+## Alternative solution
+An alternative solution for this integration would be use webhooks. In my opinio this would be a more performante solution, but I did not followed this path because one of the requirements specify that the integration must search the deals.
+
