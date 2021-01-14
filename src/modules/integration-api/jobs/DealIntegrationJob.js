@@ -19,7 +19,7 @@ const DealIntegrationJob = new CronJob('*/30 * * * * *', async () => {
 
     await updateBlingPosted.execute(blingPlacedOrders);
 
-    await consolidateDeals.execute(updateBlingPosted);
+    await consolidateDeals.execute(blingPlacedOrders);
   } catch (err) {
     console.log(err);
   }
