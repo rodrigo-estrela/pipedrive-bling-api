@@ -5,7 +5,7 @@ const AppError = require('../../errors/AppError');
 const ConsolidatedDeals = mongoose.model('consolidatedDeals');
 
 class DealsController {
-  async create(request, response) {
+  async list(request, response) {
     let { skip, limit } = request.query;
 
     if (skip) {
