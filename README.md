@@ -34,36 +34,36 @@ The main challenge for this project was to decide the logic on how to get the ne
 
   2. Add a custom filter
     I used the Pipedrive API to implement a Deal custom filter. The filter criteria is: deals with custom field bling not equal to 'posted'. See bellow the json template for the filter creation:
-    ```js
-    {
-        "name": "deals-won-bling-not-posted",
-        "type": "deals",
-        "conditions": {
-            "glue": "and",
-            "conditions": [{
-                    "glue": "and",
-                    "conditions": [{
-                        "object": "deal",
-                        "field_id": "12486",
-                        "operator": "!=",
-                        "value": 11,
-                        "extra_value": null
-                    }]
-                },
-                {
-                    "glue": "or",
-                    "conditions": [{
-                        "object": "deal",
-                        "field_id": "12486",
-                        "operator": "!=",
-                        "value": 11,
-                        "extra_value": null
-                    }]
-                }
-            ]
-        }
-    }
-    ```
+      ```json
+      {
+          "name": "deals-won-bling-not-posted",
+          "type": "deals",
+          "conditions": {
+              "glue": "and",
+              "conditions": [{
+                      "glue": "and",
+                      "conditions": [{
+                          "object": "deal",
+                          "field_id": "12486",
+                          "operator": "!=",
+                          "value": 11,
+                          "extra_value": null
+                      }]
+                  },
+                  {
+                      "glue": "or",
+                      "conditions": [{
+                          "object": "deal",
+                          "field_id": "12486",
+                          "operator": "!=",
+                          "value": 11,
+                          "extra_value": null
+                      }]
+                  }
+              ]
+          }
+      }
+      ```
 My integration has a background job to make get requests to pipedrive periodically using this custom filter.
 The deals then are parsed to xml and posted to bling api. After that they are consolidated by day and persisted in a MongoDB collection.
 
