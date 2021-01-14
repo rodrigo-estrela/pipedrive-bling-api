@@ -65,7 +65,7 @@ The main challenge for this project was to decide the logic on how to get the ne
       }
       ```
 My integration has a background job to make get requests to pipedrive periodically using this custom filter.
-The deals then are parsed to xml and posted to bling api. After that they are consolidated by day and persisted in a MongoDB collection.
+The deals then are parsed to xml and posted to bling api. After that, deals are aggregated by day and persisted in a MongoDB collection.
 
 ## Endpoints
 ### GET /deals
@@ -74,3 +74,6 @@ Parameters | Comments
 ------------- | -------------
 skip | Optional - Pagination start. Default = 0
 limit  | Optional - Items per page. Max = 100
+
+## Contact
+[![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=www.linkedin.com/in/rodrigo-estrela)](www.linkedin.com/in/rodrigo-estrela)
