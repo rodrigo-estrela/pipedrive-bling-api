@@ -75,5 +75,3 @@ Parameters | Comments
 skip | Optional - Pagination start. Default = 0
 limit  | Optional - Items per page. Max = 100
 
-## Contact
-[![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=www.linkedin.com/in/rodrigo-estrela)](www.linkedin.com/in/rodrigo-estrela)
