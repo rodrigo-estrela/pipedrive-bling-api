@@ -100,7 +100,7 @@ If you want to test the API on your own Pipedrive and Bling accounts, please, ma
       ```
 
 ## Endpoints
-### GET /v1/deals
+### GET /v1/sales
 Returns deals posted to bling, consolidated by day:
 Parameters | Comments
 ------------- | -------------
