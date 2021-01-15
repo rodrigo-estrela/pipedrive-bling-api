@@ -37,13 +37,14 @@ My implementation has a background job to make get requests to pipedrive API per
 The deals then are parsed to xml and posted to bling api. After that, put requests are made to Pipedrive API, updating the value of the custom field to 'posted'.
 Finally deals are aggregated by day and persisted in a MongoDB collection.
 
-Note: all the needed keys were intentionally committed to facilitate the evaluation of the project without the need to you goint through the process to create the custom field and custom filter on your own pipedrive account. Please feel free to use it.
+## Getting Started
+All the needed keys were intentionally committed to facilitate the evaluation of the project without the need to you going through the process of creating the custom field and custom filter on your own pipedrive account. Please feel free to use it.
  - Pipedrive api_token: 2af7e5b906d3097ddc2a0df250569d285ae74c3e
  - Bling apikey: 14ac9083cd83f4b6440d639c982862a2159671474573a31cd45a647018d0567f955089b5
 
 
-If you want to test the API on your own pipedrive account, please, make sure to:
-  - Update /src/modules/integration-api/apis/config/index.js with your baseURL and key for your Pipedrive and Bling account.
+If you want to test the API on your own Pipedrive and Bling accounts, please, make sure to:
+  - Update /src/modules/integration-api/apis/config/index.js with your baseURL and keys for your Pipedrive and Bling account.
   - Create a Deal custom field at Pipedrive:
     * Field Name: Bling
     * Field Type: Single Option
@@ -60,7 +61,7 @@ If you want to test the API on your own pipedrive account, please, make sure to:
       ```
   - Create a custom filter at Pipedrive:
     Make a post request to the endpoint /filters with the following json data:
-      ```json
+      ```js
       {
           "name": "deals-won-bling-not-posted",
           "type": "deals",
@@ -107,5 +108,5 @@ skip | Optional - Pagination start. Default = 0
 limit  | Optional - Items per page. Max = 100
 
 ## Alternative solution
-An alternative solution for this integration would be use webhooks. In my opinion this would be a more performante solution, but I did not followed this path because one of the requirements specify that the integration must search the deals.
+An alternative solution for this integration would be use webhooks. In my opinion, this would be a more performante solution, but I did not followed this path because one of the requirements specify that the integration must search the deals.
 
