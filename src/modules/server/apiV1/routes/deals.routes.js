@@ -7,11 +7,15 @@ const DealsController = require('../controllers/DealsController');
 const dealsController = new DealsController();
 const dealsRouter = Router();
 
-const querySchema = Joi.object({
+const getDealsQuerySchema = Joi.object({
   skip: Joi.number().integer().default(0),
   limit: Joi.number().integer().default(100),
 });
 
-dealsRouter.get('/', validator.query(querySchema), dealsController.list);
+dealsRouter.get(
+  '/',
+  validator.query(getDealsQuerySchema),
+  dealsController.list,
+);
 
 module.exports = dealsRouter;
