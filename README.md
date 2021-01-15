@@ -37,7 +37,7 @@ My implementation has a background job to make get requests to pipedrive API per
 The deals then are parsed to xml and posted to bling api. After that, put requests are made to Pipedrive API, updating the value of the custom field to 'posted'.
 Finally deals are aggregated by day and persisted in a MongoDB collection.
 
-## Getting Started
+## Configurations
 All the needed keys were intentionally committed to facilitate the evaluation of the project without the need to you going through the process of creating the custom field and custom filter on your own pipedrive account. Please feel free to use it.
  - Pipedrive api_token: 2af7e5b906d3097ddc2a0df250569d285ae74c3e
  - Bling apikey: 14ac9083cd83f4b6440d639c982862a2159671474573a31cd45a647018d0567f955089b5
@@ -53,7 +53,7 @@ If you want to test the API on your own Pipedrive and Bling accounts, please, ma
     Then updated /src/modules/integration-api/apis/config/index.js
       ```js
       customFields: {
-          Bling: {
+        Bling: {
           id: 12486, // update with the id of your custom field
           key: 'ce3f8df377f5c6edc35ef0ecf69973865481fbd4', // update with th key of your custom field
         },
