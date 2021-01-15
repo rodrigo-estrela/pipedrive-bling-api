@@ -100,7 +100,7 @@ If you want to test the API on your own Pipedrive and Bling accounts, please, ma
       ```
 
 ## Endpoints
-### GET /v1/sales
+### GET /v1/deals
 Returns deals posted to bling, consolidated by day:
 Parameters | Comments
 ------------- | -------------
@@ -108,5 +108,5 @@ skip | Optional - Pagination start. Default = 0
 limit  | Optional - Items per page. Max = 100
 
 ## Alternative solution
-An alternative solution for this integration would be use webhooks. In my opinion, this would be a more performante solution, but I did not followed this path because one of the requirements specify that the integration must search the deals.
+An alternative solution for this integration would be the usage of webhooks. In my opinion, this would be a more performante solution, but I did not followed this path because one of the requirements specify that the integration must search the deals.
 
