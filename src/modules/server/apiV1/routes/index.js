@@ -3,12 +3,12 @@ const dealsRouter = require('./deals.routes');
 
 const routes = Router();
 
-routes.use('/deals', dealsRouter);
-
-routes.use('/', (req, res) => {
+routes.get('/', (req, res) => {
   return res
     .status(200)
     .json({ status: 'success', message: 'The server is live' });
 });
+
+routes.use('/deals', dealsRouter);
 
 module.exports = routes;
